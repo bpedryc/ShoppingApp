@@ -8,5 +8,13 @@
     <fragment
         android:id="@+id/shoppingCartsFragment"
         android:name="com.haxos.shoppingapp.shoppingCarts.ShoppingCartsFragment"
-        android:label="Shopping Lists" />
+        android:label="Shopping Lists" >
+        <action
+            android:id="@+id/action_shoppingCartsFragment_to_cartDetailsFragment"
+            app:destination="@id/cartDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartDetailsFragment"
+        android:name="com.haxos.shoppingapp.CartDetailsFragment"
+        android:label="CartDetailsFragment" />
 </navigation>

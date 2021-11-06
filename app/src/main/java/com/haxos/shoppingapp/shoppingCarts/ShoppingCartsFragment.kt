@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.haxos.shoppingapp.EventObserver
 import com.haxos.shoppingapp.databinding.FragmentShoppingcartsBinding
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -28,6 +30,17 @@ class ShoppingCartsFragment : DaggerFragment() {
             viewmodel = viewModel
             lifecycleOwner = viewLifecycleOwner
         }
+
+        viewModel.openCartEvent.observe(viewLifecycleOwner, EventObserver {
+            openCartDetails(it)
+        })
+
         return binding.root
+    }
+
+    private fun openCartDetails(shoppingCartId: String) {
+        val action = ShoppingCartsFragmentDirections
+            .actionShoppingCartsFragmentToCartDetailsFragment()
+        findNavController().navigate(action)
     }
 }

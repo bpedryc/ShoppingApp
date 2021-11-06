@@ -22,7 +22,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/list_item_padding"
         android:paddingTop="@dimen/list_item_padding"
-        android:onClick="@{() -> viewmodel.openCart(shoppingcart.id)">
+        android:onClick="@{() -> viewmodel.openCart(shoppingcart.id)}">
 
         <ImageView
             android:layout_width="wrap_content"

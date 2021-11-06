@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.haxos.shoppingapp.Event
 import com.haxos.shoppingapp.data.Result
 import com.haxos.shoppingapp.data.Result.Success
 import com.haxos.shoppingapp.data.Result.Error
@@ -19,6 +20,9 @@ class ShoppingCartsViewModel @Inject constructor(
     private val _shoppingCarts = MutableLiveData<List<ShoppingCart>>().apply { value = emptyList() }
     val shoppingCarts: LiveData<List<ShoppingCart>> = _shoppingCarts
 
+    private val _openCartEvent = MutableLiveData<Event<String>>()
+    val openCartEvent: LiveData<Event<String>> = _openCartEvent
+
     init {
         viewModelScope.launch {
 
@@ -32,8 +36,8 @@ class ShoppingCartsViewModel @Inject constructor(
         }
     }
 
-    fun openCart(id: String) {
-        TODO()
+    fun openCart(cartId: String) {
+        _openCartEvent.value = Event(cartId)
     }
 
     private suspend fun insertTestsCarts(): List<ShoppingCart> = withContext(Dispatchers.IO) {
