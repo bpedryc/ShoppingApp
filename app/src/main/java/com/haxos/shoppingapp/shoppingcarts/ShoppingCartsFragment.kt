@@ -1,4 +1,4 @@
-package com.haxos.shoppingapp.shoppingCarts
+package com.haxos.shoppingapp.shoppingcarts
 
 import android.os.Bundle
 import android.view.LayoutInflater

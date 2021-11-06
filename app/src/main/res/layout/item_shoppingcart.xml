@@ -8,11 +8,11 @@
 
         <variable
             name="shoppingcart"
-            type="com.haxos.shoppingapp.shoppingCarts.ShoppingCart" />
+            type="com.haxos.shoppingapp.shoppingcarts.ShoppingCart" />
 
         <variable
             name="viewmodel"
-            type="com.haxos.shoppingapp.shoppingCarts.ShoppingCartsViewModel" />
+            type="com.haxos.shoppingapp.shoppingcarts.ShoppingCartsViewModel" />
     </data>
 
     <LinearLayout

@@ -19,7 +19,7 @@ package com.haxos.shoppingapp.di
 import android.content.Context
 import androidx.room.Room
 import com.haxos.shoppingapp.data.ShoppingDatabase
-import com.haxos.shoppingapp.shoppingCarts.ShoppingCartDao
+import com.haxos.shoppingapp.shoppingcarts.ShoppingCartDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

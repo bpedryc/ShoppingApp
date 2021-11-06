@@ -1,8 +1,8 @@
 package com.haxos.shoppingapp.di
 
 import androidx.lifecycle.ViewModel
-import com.haxos.shoppingapp.shoppingCarts.ShoppingCartsFragment
-import com.haxos.shoppingapp.shoppingCarts.ShoppingCartsViewModel
+import com.haxos.shoppingapp.shoppingcarts.ShoppingCartsFragment
+import com.haxos.shoppingapp.shoppingcarts.ShoppingCartsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

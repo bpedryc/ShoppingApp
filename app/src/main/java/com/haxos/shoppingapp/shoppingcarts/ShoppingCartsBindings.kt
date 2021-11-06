@@ -1,4 +1,4 @@
-package com.haxos.shoppingapp.shoppingCarts
+package com.haxos.shoppingapp.shoppingcarts
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView

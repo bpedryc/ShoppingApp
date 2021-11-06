@@ -11,7 +11,7 @@
 
         <variable
             name="viewmodel"
-            type="com.haxos.shoppingapp.shoppingCarts.ShoppingCartsViewModel" />
+            type="com.haxos.shoppingapp.shoppingcarts.ShoppingCartsViewModel" />
 
     </data>
 

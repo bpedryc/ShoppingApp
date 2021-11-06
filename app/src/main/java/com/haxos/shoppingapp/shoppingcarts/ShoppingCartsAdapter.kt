@@ -1,4 +1,4 @@
-package com.haxos.shoppingapp.shoppingCarts
+package com.haxos.shoppingapp.shoppingcarts
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.haxos.shoppingapp.databinding.ItemShoppingcartBinding
-import com.haxos.shoppingapp.shoppingCarts.ShoppingCartsAdapter.ViewHolder
+import com.haxos.shoppingapp.shoppingcarts.ShoppingCartsAdapter.ViewHolder
 
 class ShoppingCartsAdapter(private val viewModel: ShoppingCartsViewModel) :
     ListAdapter<ShoppingCart, ViewHolder>(ShoppingCartDiffCallback()) {

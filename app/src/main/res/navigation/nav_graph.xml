@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/shoppingCartsFragment"
-        android:name="com.haxos.shoppingapp.shoppingCarts.ShoppingCartsFragment"
+        android:name="com.haxos.shoppingapp.shoppingcarts.ShoppingCartsFragment"
         android:label="Shopping Lists" >
         <action
             android:id="@+id/action_shoppingCartsFragment_to_cartDetailsFragment"
@@ -15,6 +15,6 @@
     </fragment>
     <fragment
         android:id="@+id/cartDetailsFragment"
-        android:name="com.haxos.shoppingapp.CartDetailsFragment"
+        android:name="com.haxos.shoppingapp.cartdetails.CartDetailsFragment"
         android:label="CartDetailsFragment" />
 </navigation>

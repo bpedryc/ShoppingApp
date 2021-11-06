@@ -1,4 +1,4 @@
-package com.haxos.shoppingapp.shoppingCarts
+package com.haxos.shoppingapp.shoppingcarts
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.haxos.shoppingapp.shoppingCarts
+package com.haxos.shoppingapp.shoppingcarts
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
