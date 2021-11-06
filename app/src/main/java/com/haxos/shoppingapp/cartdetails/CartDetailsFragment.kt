@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
 import com.haxos.shoppingapp.databinding.FragmentCartdetailsBinding
+import com.haxos.shoppingapp.shoppingcarts.ShoppingCartsAdapter
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -24,7 +25,12 @@ class CartDetailsFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCartdetailsBinding.inflate(inflater, container, false)
+        binding = FragmentCartdetailsBinding.inflate(inflater, container, false).apply {
+            viewmodel = viewModel
+            lifecycleOwner = viewLifecycleOwner
+
+            groceries.adapter = GroceriesAdapter()
+        }
         return binding.root
     }
 }
