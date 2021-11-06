@@ -53,6 +53,7 @@ class ShoppingCartsViewModel @Inject constructor(
         if (result is Success) {
             return result.data
         }
+        println(result)
         return null
     }
 

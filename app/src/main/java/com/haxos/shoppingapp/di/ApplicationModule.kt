@@ -18,6 +18,7 @@ package com.haxos.shoppingapp.di
 
 import android.content.Context
 import androidx.room.Room
+import com.haxos.shoppingapp.cartdetails.GroceryDao
 import com.haxos.shoppingapp.data.ShoppingDatabase
 import com.haxos.shoppingapp.shoppingcarts.ShoppingCartDao
 import dagger.Module
@@ -42,6 +43,12 @@ object ApplicationModule {
     @Provides
     fun provideShoppingCartDao(database: ShoppingDatabase) : ShoppingCartDao {
         return database.shoppingCartDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideGroceryDao(database: ShoppingDatabase) : GroceryDao {
+        return database.groceryDao()
     }
 
 

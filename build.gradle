@@ -4,6 +4,7 @@ buildscript {
     ext.navVersion = '2.3.5'
     ext.daggerVersion = '2.37'
     ext.roomVersion = '2.3.0'
+    ext.coroutinesVersion = '1.2.1'
 
     repositories {
         google()

@@ -40,7 +40,7 @@ class ShoppingCartsFragment : DaggerFragment() {
 
     private fun openCartDetails(shoppingCartId: String) {
         val action = ShoppingCartsFragmentDirections
-            .actionShoppingCartsFragmentToCartDetailsFragment()
+            .actionShoppingCartsFragmentToCartDetailsFragment(shoppingCartId)
         findNavController().navigate(action)
     }
 }

@@ -5,14 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.haxos.shoppingapp.databinding.FragmentCartdetailsBinding
-import com.haxos.shoppingapp.shoppingcarts.ShoppingCartsAdapter
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class CartDetailsFragment : DaggerFragment() {
+
+    private val args: CartDetailsFragmentArgs by navArgs()
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -31,6 +32,9 @@ class CartDetailsFragment : DaggerFragment() {
 
             groceries.adapter = GroceriesAdapter()
         }
+
+        viewModel.start(args.cartId)
+
         return binding.root
     }
 }

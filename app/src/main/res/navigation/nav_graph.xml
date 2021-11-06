@@ -16,5 +16,9 @@
     <fragment
         android:id="@+id/cartDetailsFragment"
         android:name="com.haxos.shoppingapp.cartdetails.CartDetailsFragment"
-        android:label="CartDetailsFragment" />
+        android:label="CartDetailsFragment" >
+        <argument
+            android:name="cartId"
+            app:argType="string" />
+    </fragment>
 </navigation>
