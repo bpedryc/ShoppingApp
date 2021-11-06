@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.haxos.shoppingapp.databinding.FragmentShoppinglistBinding
+import com.haxos.shoppingapp.databinding.FragmentShoppingcartsBinding
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -16,13 +16,13 @@ class ShoppingCartsFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<ShoppingCartsViewModel> { viewModelFactory }
 
-    private lateinit var binding: FragmentShoppinglistBinding
+    private lateinit var binding: FragmentShoppingcartsBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentShoppinglistBinding.inflate(inflater, container, false).apply {
+        binding = FragmentShoppingcartsBinding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
         }
         return binding.root
