@@ -21,14 +21,38 @@ class ShoppingCartsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val result = loadCarts()
-            if (result is Success) {
-                _shoppingCarts.value = result.data
+
+            var carts = getCarts() ?: return@launch
+            if (carts.isEmpty()) {
+                val testCarts = insertTestsCarts()
+                carts = testCarts
             }
+
+            _shoppingCarts.value = carts
         }
     }
 
-    private suspend fun loadCarts(): Result<List<ShoppingCart>> = withContext(Dispatchers.IO) {
+    fun openCart(id: String) {
+        TODO()
+    }
+
+    private suspend fun insertTestsCarts(): List<ShoppingCart> = withContext(Dispatchers.IO) {
+        val cart1 = ShoppingCart("Monday groceries")
+        val cart2 = ShoppingCart("Saturday big shopping")
+        shoppingCartDao.insertCart(cart1)
+        shoppingCartDao.insertCart(cart2)
+        return@withContext listOf(cart1, cart2)
+    }
+
+    private suspend fun getCarts() : List<ShoppingCart>? {
+        val result = fetchCarts()
+        if (result is Success) {
+            return result.data
+        }
+        return null
+    }
+
+    private suspend fun fetchCarts(): Result<List<ShoppingCart>> = withContext(Dispatchers.IO) {
         return@withContext try {
             Success(shoppingCartDao.getCarts())
         } catch (e: Exception) {

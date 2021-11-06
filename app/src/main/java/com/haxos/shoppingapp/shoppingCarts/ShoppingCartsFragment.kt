@@ -23,9 +23,11 @@ class ShoppingCartsFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentShoppingcartsBinding.inflate(inflater, container, false).apply {
+            shoppingCarts.adapter = ShoppingCartsAdapter(viewModel)
+
             viewmodel = viewModel
+            lifecycleOwner = viewLifecycleOwner
         }
         return binding.root
     }
-
 }
