@@ -36,7 +36,9 @@ object ApplicationModule {
             context.applicationContext,
             ShoppingDatabase::class.java,
             "shopping.db"
-        ).build()
+        )
+            .createFromAsset("initial_shopping.db")
+            .build()
     }
 
     @Singleton
