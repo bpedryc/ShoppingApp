@@ -25,29 +25,23 @@ class ShoppingListsViewModel @Inject constructor(
     private val _openShoppingListEvent = MutableLiveData<Event<String>>()
     val openShoppingListEvent: LiveData<Event<String>> = _openShoppingListEvent
 
-    init {
-        viewModelScope.launch {
+    private val _createdShoppingListEvent = MutableLiveData<Event<Unit>>()
+    val createdShoppingListEvent: LiveData<Event<Unit>> = _createdShoppingListEvent
 
-            var shoppingLists = getShoppingLists() ?: return@launch
-            if (shoppingLists.isEmpty()) {
-                val testShoppingLists = insertTestsShoppingLists()
-                shoppingLists = testShoppingLists
-            }
+    fun loadShoppingLists() = viewModelScope.launch {
 
-            _shoppingLists.value = shoppingLists
-        }
+        val shoppingLists = getShoppingLists() ?: return@launch
+        _shoppingLists.value = shoppingLists
     }
 
     fun openShoppingList(shoppingListId: String) {
         _openShoppingListEvent.value = Event(shoppingListId)
     }
 
-    private suspend fun insertTestsShoppingLists(): List<ShoppingList> = withContext(Dispatchers.IO) {
-        val shoppingList1 = ShoppingList("Monday groceries")
-        val shoppingList2 = ShoppingList("Saturday big shopping")
-        shoppingListDao.insertShoppingList(shoppingList1)
-        shoppingListDao.insertShoppingList(shoppingList2)
-        return@withContext listOf(shoppingList1, shoppingList2)
+    fun createShoppingList(name: String) = viewModelScope.launch {
+        val newShoppingList = ShoppingList(name)
+        saveShoppingList(newShoppingList)
+        _createdShoppingListEvent.value = Event(Unit)
     }
 
     private suspend fun getShoppingLists() : List<ShoppingList>? {
@@ -59,6 +53,10 @@ class ShoppingListsViewModel @Inject constructor(
         return null
     }
 
+    private suspend fun saveShoppingList(shoppingList: ShoppingList) = withContext(Dispatchers.IO) {
+        shoppingListDao.insertShoppingList(shoppingList)
+    }
+
     private suspend fun fetchShoppingLists(): Result<List<ShoppingList>> = withContext(Dispatchers.IO) {
         return@withContext try {
             Success(shoppingListDao.getShoppingLists())
@@ -66,5 +64,4 @@ class ShoppingListsViewModel @Inject constructor(
             Error(e)
         }
     }
-
 }

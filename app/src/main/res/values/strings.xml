@@ -4,4 +4,7 @@
     <string name="tab_shoppinglist_archived">Archived</string>
     <string name="title_shoppinglists">Shopping lists</string>
     <string name="title_shoppinglistdetails">Shopping list details</string>
+    <string name="dialogtitle_shoppinglist_add">Create new shopping list</string>
+    <string name="dialogbutton_add">Add</string>
+    <string name="dialogbutton_cancel">Cancel</string>
 </resources>
