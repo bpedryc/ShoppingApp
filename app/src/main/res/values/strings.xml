@@ -12,7 +12,7 @@
     <string name="hint_grocery_name">Grocery name</string>
     <string name="hint_grocery_count">How many</string>
     <string name="dialogmessage_grocery_add">Enter the new grocery name</string>
-    <string name="no_active_shopping_lists">There are no active shopping lists</string>
-    <string name="no_archived_shopping_lists">There are no archived shopping lists</string>
-    <string name="no_groceries">There are no groceries in this list</string>
+    <string name="no_active_shopping_lists">You have no active shopping lists</string>
+    <string name="no_archived_shopping_lists">You have no archived shopping lists</string>
+    <string name="no_groceries">There are no groceries on this list</string>
 </resources>
