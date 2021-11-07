@@ -2,4 +2,6 @@
     <string name="app_name">ShoppingApp</string>
     <string name="tab_shoppinglist_active">Active</string>
     <string name="tab_shoppinglist_archived">Archived</string>
+    <string name="title_shoppinglists">Shopping lists</string>
+    <string name="title_shoppinglistdetails">Shopping list details</string>
 </resources>

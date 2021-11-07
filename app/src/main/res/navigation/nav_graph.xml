@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/shoppingListsFragment"
         android:name="com.haxos.shoppingapp.shoppinglists.ShoppingListsFragment"
-        android:label="Shopping Lists">
+        android:label="@string/title_shoppinglists">
         <action
             android:id="@+id/action_shoppingListsFragment_to_shoppingListDetailsFragment"
             app:destination="@id/shoppingListDetailsFragment" />
@@ -16,7 +16,7 @@
     <fragment
         android:id="@+id/shoppingListDetailsFragment"
         android:name="com.haxos.shoppingapp.shoppinglistdetails.ShoppingListDetailsFragment"
-        android:label="ShoppingListDetailsFragment">
+        android:label="@string/title_shoppinglistdetails">
         <argument
             android:name="shoppingListId"
             app:argType="string" />
