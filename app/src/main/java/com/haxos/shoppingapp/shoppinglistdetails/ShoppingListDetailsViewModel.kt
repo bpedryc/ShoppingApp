@@ -23,6 +23,9 @@ class ShoppingListDetailsViewModel @Inject constructor(
     private val _createdGroceryEvent = MutableLiveData<Event<Unit>>()
     val createdGroceryEvent: LiveData<Event<Unit>> = _createdGroceryEvent
 
+    private val _deletedGroceryEvent = MutableLiveData<Event<Unit>>()
+    val deletedGroceryEvent: LiveData<Event<Unit>> = _deletedGroceryEvent
+
     fun start(shoppingListId: String) = viewModelScope.launch {
         val groceries = getGroceries(shoppingListId) ?: return@launch
         _groceries.value = groceries
@@ -32,6 +35,11 @@ class ShoppingListDetailsViewModel @Inject constructor(
         val newGrocery = Grocery(groceryName, shoppingListId)
         insertGrocery(newGrocery)
         _createdGroceryEvent.value = Event(Unit)
+    }
+
+    fun deleteGrocery(groceryId: String) = viewModelScope.launch {
+        groceryDao.deleteGroceryById(groceryId)
+        _deletedGroceryEvent.value = Event(Unit)
     }
 
     private suspend fun getGroceries(shoppingListId: String) : List<Grocery>? {

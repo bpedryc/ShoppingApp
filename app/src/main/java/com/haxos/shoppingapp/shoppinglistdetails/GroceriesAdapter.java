@@ -16,8 +16,11 @@ import com.haxos.shoppingapp.databinding.ItemGroceryBinding;
 
 public class GroceriesAdapter extends ListAdapter<Grocery, ViewHolder> {
 
-    public GroceriesAdapter() {
+    private final ShoppingListDetailsViewModel viewModel;
+
+    public GroceriesAdapter(ShoppingListDetailsViewModel viewModel) {
         super(groceryDiffCallback());
+        this.viewModel = viewModel;
     }
 
     @NonNull
@@ -29,7 +32,7 @@ public class GroceriesAdapter extends ListAdapter<Grocery, ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Grocery item = getItem(position);
-        holder.bind(item);
+        holder.bind(viewModel, item);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -48,8 +51,9 @@ public class GroceriesAdapter extends ListAdapter<Grocery, ViewHolder> {
             return new ViewHolder(binding);
         }
 
-        public void bind(Grocery item) {
+        public void bind(ShoppingListDetailsViewModel viewModel, Grocery item) {
             binding.setGrocery(item);
+            binding.setViewmodel(viewModel);
             binding.executePendingBindings();
         }
     }

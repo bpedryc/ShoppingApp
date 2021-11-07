@@ -37,7 +37,7 @@ class ShoppingListDetailsFragment : DaggerFragment() {
                 viewmodel = viewModel
                 lifecycleOwner = viewLifecycleOwner
 
-                groceries.adapter = GroceriesAdapter()
+                groceries.adapter = GroceriesAdapter(viewModel)
         }
 
         setupAddGroceryDialog()
@@ -67,6 +67,9 @@ class ShoppingListDetailsFragment : DaggerFragment() {
 
     private fun setupRefresh() {
         viewModel.createdGroceryEvent.observe(viewLifecycleOwner, EventObserver {
+            viewModel.start(args.shoppingListId)
+        })
+        viewModel.deletedGroceryEvent.observe(viewLifecycleOwner, EventObserver {
             viewModel.start(args.shoppingListId)
         })
     }
