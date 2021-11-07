@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.haxos.shoppingapp.data.Grocery
 import com.haxos.shoppingapp.data.Result
 import com.haxos.shoppingapp.data.database.GroceryDao
+import com.haxos.shoppingapp.utils.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -19,20 +20,18 @@ class ShoppingListDetailsViewModel @Inject constructor(
     private val _groceries = MutableLiveData<List<Grocery>>().apply { value = emptyList() }
     val groceries: LiveData<List<Grocery>> = _groceries
 
+    private val _createdGroceryEvent = MutableLiveData<Event<Unit>>()
+    val createdGroceryEvent: LiveData<Event<Unit>> = _createdGroceryEvent
+
     fun start(shoppingListId: String) = viewModelScope.launch {
-        var groceries = getGroceries(shoppingListId) ?: return@launch
-        if (groceries.isEmpty()) {
-            groceries = insertTestGroceries()
-        }
+        val groceries = getGroceries(shoppingListId) ?: return@launch
         _groceries.value = groceries
     }
 
-    private suspend fun insertTestGroceries(): List<Grocery> = withContext(Dispatchers.IO) {
-        val grocery1 = Grocery("Tomato")
-        val grocery2 = Grocery("Apple pie")
-        groceryDao.insertGrocery(grocery1)
-        groceryDao.insertGrocery(grocery2)
-        return@withContext listOf(grocery1, grocery2)
+    fun createGrocery(shoppingListId: String, groceryName: String) = viewModelScope.launch {
+        val newGrocery = Grocery(groceryName, shoppingListId)
+        insertGrocery(newGrocery)
+        _createdGroceryEvent.value = Event(Unit)
     }
 
     private suspend fun getGroceries(shoppingListId: String) : List<Grocery>? {
@@ -44,6 +43,10 @@ class ShoppingListDetailsViewModel @Inject constructor(
         return null
     }
 
+    private suspend fun insertGrocery(grocery: Grocery) = withContext(Dispatchers.IO) {
+        groceryDao.insertGrocery(grocery)
+    }
+
     private suspend fun fetchGroceries(shoppingListId: String): Result<List<Grocery>>
     = withContext(Dispatchers.IO) {
         return@withContext try {
@@ -52,5 +55,4 @@ class ShoppingListDetailsViewModel @Inject constructor(
             Result.Error(e)
         }
     }
-
 }

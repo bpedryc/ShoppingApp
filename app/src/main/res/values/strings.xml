@@ -8,4 +8,8 @@
     <string name="dialogbutton_add">Add</string>
     <string name="dialogbutton_cancel">Cancel</string>
     <string name="dialogmessage_shoppinglist_add">Enter the new shopping list name</string>
+    <string name="dialogtitle_grocery_add">Add a new grocery</string>
+    <string name="hint_grocery_name">Grocery name</string>
+    <string name="hint_grocery_count">How many</string>
+    <string name="dialogmessage_grocery_add">Enter the new grocery name</string>
 </resources>
