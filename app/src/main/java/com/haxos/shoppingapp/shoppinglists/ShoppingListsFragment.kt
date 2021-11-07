@@ -80,7 +80,7 @@ class ShoppingListsFragment : DaggerFragment() {
         viewModel.createdShoppingListEvent.observe(viewLifecycleOwner, EventObserver {
             viewModel.loadShoppingLists()
         })
-        viewModel.deletedShoppingListEvent.observe(viewLifecycleOwner, EventObserver {
+        viewModel.archivedShoppingListEvent.observe(viewLifecycleOwner, EventObserver {
             viewModel.loadShoppingLists()
         })
     }

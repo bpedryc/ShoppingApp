@@ -18,6 +18,9 @@ interface ShoppingListDao {
     @Update
     suspend fun updateShoppingList(shoppingList: ShoppingList)
 
+    @Query("UPDATE shopping_lists SET archived = :archived WHERE id = :shoppingListId")
+    suspend fun updateArchived(shoppingListId: String, archived: Boolean)
+
     @Query("DELETE FROM shopping_lists WHERE id = :shoppingListId")
     suspend fun deleteShoppingListById(shoppingListId: String)
 
