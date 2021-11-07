@@ -24,7 +24,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_shopping_cart" />
+            app:srcCompat="@drawable/ic_shopping_basket" />
 
         <TextView
             android:layout_width="match_parent"
