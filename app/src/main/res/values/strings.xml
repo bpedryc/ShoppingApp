@@ -7,4 +7,5 @@
     <string name="dialogtitle_shoppinglist_add">Create new shopping list</string>
     <string name="dialogbutton_add">Add</string>
     <string name="dialogbutton_cancel">Cancel</string>
+    <string name="dialogmessage_shoppinglist_add">Enter the new shopping list name</string>
 </resources>

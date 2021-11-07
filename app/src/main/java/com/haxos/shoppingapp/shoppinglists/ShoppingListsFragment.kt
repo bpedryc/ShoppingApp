@@ -23,6 +23,8 @@ class ShoppingListsFragment : DaggerFragment() {
 
     private lateinit var binding: FragmentShoppinglistsBinding
 
+    private lateinit var addShoppingListDialog: AlertDialog
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,10 +40,27 @@ class ShoppingListsFragment : DaggerFragment() {
         setupNavigation()
         setupFab()
         setupRefresh()
+        setupDialogs()
 
         viewModel.loadShoppingLists()
 
         return binding.root
+    }
+
+    private fun setupDialogs() {
+        addShoppingListDialog = AlertDialog.Builder(context)
+            .setTitle(R.string.dialogtitle_shoppinglist_add)
+            .setMessage(R.string.dialogmessage_shoppinglist_add)
+            .setView(R.layout.dialogview_singleinput)
+            .setPositiveButton(R.string.dialogbutton_add) { _, _ -> createShoppingList() }
+            .setNegativeButton(R.string.dialogbutton_cancel) { _, _ -> }
+            .create()
+    }
+
+    private fun createShoppingList() {
+        val shoppingCartNameInput = addShoppingListDialog.findViewById<EditText>(R.id.dialoginput)
+        val shoppingCartName = shoppingCartNameInput.text.toString()
+        viewModel.createShoppingList(shoppingCartName)
     }
 
     private fun setupRefresh() {
@@ -64,20 +83,7 @@ class ShoppingListsFragment : DaggerFragment() {
 
     private fun setupFab() {
         binding.fabAddShoppinglist.setOnClickListener {
-            displayNewShoppingListDialog()
+            addShoppingListDialog.show()
         }
-    }
-
-    private fun displayNewShoppingListDialog() {
-        val nameEditText = EditText(context)
-
-        AlertDialog.Builder(context)
-            .setTitle(R.string.dialogtitle_shoppinglist_add)
-            .setView(nameEditText)
-            .setPositiveButton(R.string.dialogbutton_add) { _, _ ->
-                viewModel.createShoppingList(nameEditText.text.toString())
-            }
-            .setNegativeButton(R.string.dialogbutton_cancel) { _, _ -> }
-            .show()
     }
 }
