@@ -4,7 +4,7 @@
 
     <data>
 
-        <import type="android.widget.CompoundButton" />
+        <import type="android.view.View" />
 
         <variable
             name="shoppinglist"
@@ -51,7 +51,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_archive"
             android:backgroundTint="@color/primary"
-            android:onClick="@{() -> viewmodel.archiveShoppingList(shoppinglist.id)}"/>
+            android:onClick="@{() -> viewmodel.archiveShoppingList(shoppinglist.id)}"
+            android:visibility="@{shoppinglist.archived ? View.GONE : View.VISIBLE}"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
