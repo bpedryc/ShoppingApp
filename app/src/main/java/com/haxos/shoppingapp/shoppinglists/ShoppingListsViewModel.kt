@@ -1,9 +1,7 @@
 package com.haxos.shoppingapp.shoppinglists
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.haxos.shoppingapp.R
 import com.haxos.shoppingapp.utils.Event
 import com.haxos.shoppingapp.data.Result
 import com.haxos.shoppingapp.data.Result.Success
@@ -28,7 +26,18 @@ class ShoppingListsViewModel @Inject constructor(
     private val _createdShoppingListEvent = MutableLiveData<Event<Unit>>()
     val createdShoppingListEvent: LiveData<Event<Unit>> = _createdShoppingListEvent
 
+    private val _noListsLabel = MutableLiveData<Int>()
+    val noListsLabel: LiveData<Int> = _noListsLabel
+
+    val empty: LiveData<Boolean> = Transformations.map(_shoppingLists) {
+        it.isEmpty()
+    }
+
     private var currentFilter = ShoppingListFilter.ACTIVE
+
+    init {
+        setFilter(currentFilter)
+    }
 
     fun loadShoppingLists() = viewModelScope.launch {
 
@@ -51,6 +60,10 @@ class ShoppingListsViewModel @Inject constructor(
 
     fun setFilter(filter: ShoppingListFilter) {
         currentFilter = filter
+        when (filter) {
+            ShoppingListFilter.ACTIVE -> _noListsLabel.value = R.string.no_active_shopping_lists
+            ShoppingListFilter.ARCHIVED -> _noListsLabel.value = R.string.no_archived_shopping_lists
+        }
     }
 
     fun openShoppingList(shoppingListId: String) {

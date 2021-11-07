@@ -1,9 +1,6 @@
 package com.haxos.shoppingapp.shoppinglistdetails
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.haxos.shoppingapp.data.Grocery
 import com.haxos.shoppingapp.data.Result
 import com.haxos.shoppingapp.data.database.GroceryDao
@@ -25,6 +22,10 @@ class ShoppingListDetailsViewModel @Inject constructor(
 
     private val _deletedGroceryEvent = MutableLiveData<Event<Unit>>()
     val deletedGroceryEvent: LiveData<Event<Unit>> = _deletedGroceryEvent
+
+    val empty: LiveData<Boolean> = Transformations.map(_groceries) {
+        it.isEmpty()
+    }
 
     fun start(shoppingListId: String) = viewModelScope.launch {
         val groceries = getGroceries(shoppingListId) ?: return@launch
