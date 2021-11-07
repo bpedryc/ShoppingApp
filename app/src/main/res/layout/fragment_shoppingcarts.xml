@@ -15,16 +15,36 @@
 
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs_shoppingcarts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/tab_shoppinglist_active"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/tab_shoppinglist_archived"/>
+
+        </com.google.android.material.tabs.TabLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/shopping_carts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabs_shoppingcarts"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:items="@{viewmodel.shoppingCarts}"/>
 
