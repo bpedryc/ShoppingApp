@@ -71,7 +71,7 @@ class ShoppingListsFragment : DaggerFragment() {
             .setMessage(R.string.dialogmessage_shoppinglist_add)
             .setView(R.layout.dialogview_singleinput)
             .setPositiveButton(R.string.dialogbutton_add) { _, _ -> createShoppingList() }
-            .setNegativeButton(R.string.dialogbutton_cancel) { _, _ -> }
+            .setNegativeButton(R.string.dialogbutton_cancel) { _, _ -> clearDialogInput() }
             .create()
     }
 
@@ -82,8 +82,14 @@ class ShoppingListsFragment : DaggerFragment() {
     }
 
     private fun createShoppingList() {
-        val shoppingCartNameInput = addShoppingListDialog.findViewById<EditText>(R.id.dialoginput)
-        val shoppingCartName = shoppingCartNameInput.text.toString()
-        viewModel.createShoppingList(shoppingCartName)
+        val shoppingListNameInput = addShoppingListDialog.findViewById<EditText>(R.id.dialoginput)
+        val shoppingListName = shoppingListNameInput.text.toString()
+        viewModel.createShoppingList(shoppingListName)
+        shoppingListNameInput.text.clear()
+    }
+
+    private fun clearDialogInput() {
+        val shoppingListNameInput = addShoppingListDialog.findViewById<EditText>(R.id.dialoginput)
+        shoppingListNameInput.text.clear()
     }
 }
