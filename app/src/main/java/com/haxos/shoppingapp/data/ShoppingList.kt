@@ -8,5 +8,6 @@ import java.util.*
 @Entity(tableName = "shopping_lists")
 data class ShoppingList @JvmOverloads constructor(
     @ColumnInfo(name = "name") var name: String = "",
+    @ColumnInfo(name = "archived") var archived: Boolean = false,
     @PrimaryKey @ColumnInfo(name = "id") var id: String = UUID.randomUUID().toString()
 )

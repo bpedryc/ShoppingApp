@@ -28,10 +28,29 @@ class ShoppingListsViewModel @Inject constructor(
     private val _createdShoppingListEvent = MutableLiveData<Event<Unit>>()
     val createdShoppingListEvent: LiveData<Event<Unit>> = _createdShoppingListEvent
 
+    private var currentFilter = ShoppingListFilter.ACTIVE
+
     fun loadShoppingLists() = viewModelScope.launch {
 
         val shoppingLists = getShoppingLists() ?: return@launch
-        _shoppingLists.value = shoppingLists
+        val shoppingListsToShow = ArrayList<ShoppingList>()
+
+        for (shoppingList in shoppingLists) {
+            when (currentFilter) {
+                ShoppingListFilter.ACTIVE -> if (!shoppingList.archived) {
+                    shoppingListsToShow.add(shoppingList)
+                }
+                ShoppingListFilter.ARCHIVED -> if (shoppingList.archived) {
+                    shoppingListsToShow.add(shoppingList)
+                }
+            }
+        }
+
+        _shoppingLists.value = shoppingListsToShow
+    }
+
+    fun setFilter(filter: ShoppingListFilter) {
+        currentFilter = filter
     }
 
     fun openShoppingList(shoppingListId: String) {

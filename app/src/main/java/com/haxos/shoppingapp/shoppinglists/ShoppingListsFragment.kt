@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.tabs.TabLayout
 import com.haxos.shoppingapp.R
 import com.haxos.shoppingapp.databinding.FragmentShoppinglistsBinding
 import com.haxos.shoppingapp.utils.EventObserver
@@ -37,6 +38,7 @@ class ShoppingListsFragment : DaggerFragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
+        setupTab()
         setupNavigation()
         setupFab()
         setupRefresh()
@@ -45,6 +47,21 @@ class ShoppingListsFragment : DaggerFragment() {
         viewModel.loadShoppingLists()
 
         return binding.root
+    }
+
+    private fun setupTab() {
+        binding.tabsShoppinglists.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                if (tab.position == 0) {
+                    viewModel.setFilter(ShoppingListFilter.ACTIVE)
+                } else if (tab.position == 1) {
+                    viewModel.setFilter(ShoppingListFilter.ARCHIVED)
+                }
+                viewModel.loadShoppingLists()
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
     }
 
     private fun setupNavigation() {
