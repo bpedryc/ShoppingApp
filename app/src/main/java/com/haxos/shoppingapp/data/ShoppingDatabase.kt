@@ -2,15 +2,15 @@ package com.haxos.shoppingapp.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.haxos.shoppingapp.cartdetails.Grocery
-import com.haxos.shoppingapp.cartdetails.GroceryDao
-import com.haxos.shoppingapp.shoppingcarts.ShoppingCart
-import com.haxos.shoppingapp.shoppingcarts.ShoppingCartDao
+import com.haxos.shoppingapp.shoppinglistdetails.Grocery
+import com.haxos.shoppingapp.shoppinglistdetails.GroceryDao
+import com.haxos.shoppingapp.shoppinglists.ShoppingList
+import com.haxos.shoppingapp.shoppinglists.ShoppingListDao
 
-@Database(entities = [ShoppingCart::class, Grocery::class], version = 1, exportSchema = false)
+@Database(entities = [ShoppingList::class, Grocery::class], version = 1, exportSchema = false)
 abstract class ShoppingDatabase : RoomDatabase() {
 
-    abstract fun shoppingCartDao() : ShoppingCartDao
+    abstract fun shoppingListDao() : ShoppingListDao
 
     abstract fun groceryDao() : GroceryDao
 

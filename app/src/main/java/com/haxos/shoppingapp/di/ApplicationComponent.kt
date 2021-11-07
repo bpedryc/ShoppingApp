@@ -34,8 +34,8 @@ import javax.inject.Singleton
     modules = [
         ApplicationModule::class,
         AndroidSupportInjectionModule::class,
-        ShoppingCartsModule::class,
-        CartDetailsModule::class
+        ShoppingListsModule::class,
+        ShoppingListDetailsModule::class
     ])
 interface ApplicationComponent : AndroidInjector<ShoppingApplication> {
 

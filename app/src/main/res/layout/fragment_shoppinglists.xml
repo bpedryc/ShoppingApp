@@ -11,7 +11,7 @@
 
         <variable
             name="viewmodel"
-            type="com.haxos.shoppingapp.shoppingcarts.ShoppingCartsViewModel" />
+            type="com.haxos.shoppingapp.shoppinglists.ShoppingListsViewModel" />
 
     </data>
 
@@ -22,7 +22,7 @@
 
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs_shoppingcarts"
+            android:id="@+id/tabs_shoppinglists"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent">
@@ -41,12 +41,12 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/shopping_carts"
+            android:id="@+id/shopping_lists"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tabs_shoppingcarts"
+            app:layout_constraintTop_toBottomOf="@id/tabs_shoppinglists"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:items="@{viewmodel.shoppingCarts}"/>
+            app:items="@{viewmodel.shoppingLists}"/>
 
 
 

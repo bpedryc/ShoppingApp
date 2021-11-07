@@ -5,8 +5,8 @@
         
         <variable
             name="viewmodel"
-            type="com.haxos.shoppingapp.cartdetails.CartDetailsViewModel" />
-        
+            type="com.haxos.shoppingapp.shoppinglistdetails.ShoppingListDetailsViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

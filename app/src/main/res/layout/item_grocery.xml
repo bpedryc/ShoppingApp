@@ -8,7 +8,7 @@
 
         <variable
             name="grocery"
-            type="com.haxos.shoppingapp.cartdetails.Grocery" />
+            type="com.haxos.shoppingapp.shoppinglistdetails.Grocery" />
 
     </data>
 

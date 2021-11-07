@@ -1,15 +1,15 @@
-package com.haxos.shoppingapp.shoppingcarts
+package com.haxos.shoppingapp.shoppinglists
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.haxos.shoppingapp.databinding.ItemShoppingcartBinding
-import com.haxos.shoppingapp.shoppingcarts.ShoppingCartsAdapter.ViewHolder
+import com.haxos.shoppingapp.databinding.ItemShoppinglistBinding
+import com.haxos.shoppingapp.shoppinglists.ShoppingListsAdapter.ViewHolder
 
-class ShoppingCartsAdapter(private val viewModel: ShoppingCartsViewModel) :
-    ListAdapter<ShoppingCart, ViewHolder>(ShoppingCartDiffCallback()) {
+class ShoppingListsAdapter(private val viewModel: ShoppingListsViewModel) :
+    ListAdapter<ShoppingList, ViewHolder>(ShoppingListDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, postion: Int) {
         val item = getItem(postion)
@@ -20,19 +20,19 @@ class ShoppingCartsAdapter(private val viewModel: ShoppingCartsViewModel) :
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(private val binding: ItemShoppingcartBinding) :
+    class ViewHolder private constructor(private val binding: ItemShoppinglistBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(viewModel: ShoppingCartsViewModel, item: ShoppingCart) {
+        fun bind(viewModel: ShoppingListsViewModel, item: ShoppingList) {
             binding.viewmodel = viewModel
-            binding.shoppingcart = item
+            binding.shoppinglist = item
             binding.executePendingBindings()
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemShoppingcartBinding
+                val binding = ItemShoppinglistBinding
                     .inflate(layoutInflater, parent, false)
 
                 return ViewHolder(binding)
@@ -42,12 +42,12 @@ class ShoppingCartsAdapter(private val viewModel: ShoppingCartsViewModel) :
     }
 }
 
-class ShoppingCartDiffCallback : DiffUtil.ItemCallback<ShoppingCart>() {
-    override fun areItemsTheSame(oldItem: ShoppingCart, newItem: ShoppingCart): Boolean {
+class ShoppingListDiffCallback : DiffUtil.ItemCallback<ShoppingList>() {
+    override fun areItemsTheSame(oldItem: ShoppingList, newItem: ShoppingList): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: ShoppingCart, newItem: ShoppingCart): Boolean {
+    override fun areContentsTheSame(oldItem: ShoppingList, newItem: ShoppingList): Boolean {
         return oldItem == newItem
     }
 }

@@ -7,12 +7,12 @@
         <import type="android.widget.CompoundButton" />
 
         <variable
-            name="shoppingcart"
-            type="com.haxos.shoppingapp.shoppingcarts.ShoppingCart" />
+            name="shoppinglist"
+            type="com.haxos.shoppingapp.shoppinglists.ShoppingList" />
 
         <variable
             name="viewmodel"
-            type="com.haxos.shoppingapp.shoppingcarts.ShoppingCartsViewModel" />
+            type="com.haxos.shoppingapp.shoppinglists.ShoppingListsViewModel" />
     </data>
 
     <LinearLayout
@@ -22,7 +22,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/list_item_padding"
         android:paddingTop="@dimen/list_item_padding"
-        android:onClick="@{() -> viewmodel.openCart(shoppingcart.id)}">
+        android:onClick="@{() -> viewmodel.openShoppingList(shoppinglist.id)}">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:text="@{shoppingcart.name}" />
+            android:text="@{shoppinglist.name}" />
 
 
     </LinearLayout>

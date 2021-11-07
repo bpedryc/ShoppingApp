@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/shoppingCartsFragment">
+    app:startDestination="@id/shoppingListsFragment">
 
     <fragment
-        android:id="@+id/shoppingCartsFragment"
-        android:name="com.haxos.shoppingapp.shoppingcarts.ShoppingCartsFragment"
-        android:label="Shopping Lists" >
+        android:id="@+id/shoppingListsFragment"
+        android:name="com.haxos.shoppingapp.shoppinglists.ShoppingListsFragment"
+        android:label="Shopping Lists">
         <action
-            android:id="@+id/action_shoppingCartsFragment_to_cartDetailsFragment"
-            app:destination="@id/cartDetailsFragment" />
+            android:id="@+id/action_shoppingListsFragment_to_shoppingListDetailsFragment"
+            app:destination="@id/shoppingListDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/cartDetailsFragment"
-        android:name="com.haxos.shoppingapp.cartdetails.CartDetailsFragment"
-        android:label="CartDetailsFragment" >
+        android:id="@+id/shoppingListDetailsFragment"
+        android:name="com.haxos.shoppingapp.shoppinglistdetails.ShoppingListDetailsFragment"
+        android:label="ShoppingListDetailsFragment">
         <argument
-            android:name="cartId"
+            android:name="shoppingListId"
             app:argType="string" />
     </fragment>
 </navigation>
