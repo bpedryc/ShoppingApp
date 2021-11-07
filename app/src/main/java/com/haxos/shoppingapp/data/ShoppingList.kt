@@ -9,5 +9,6 @@ import java.util.*
 data class ShoppingList @JvmOverloads constructor(
     @ColumnInfo(name = "name") var name: String = "",
     @ColumnInfo(name = "archived") var archived: Boolean = false,
+    @ColumnInfo(name = "created_time") var createdTime: Date? = null,
     @PrimaryKey @ColumnInfo(name = "id") var id: String = UUID.randomUUID().toString()
 )
