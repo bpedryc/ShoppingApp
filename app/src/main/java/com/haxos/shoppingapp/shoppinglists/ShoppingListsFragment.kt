@@ -52,16 +52,13 @@ class ShoppingListsFragment : DaggerFragment() {
     private fun setupTab() {
         binding.tabsShoppinglists.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                if (tab.position == 0) {
-                    viewModel.setFilter(ShoppingListFilter.ACTIVE)
-                } else if (tab.position == 1) {
-                    viewModel.setFilter(ShoppingListFilter.ARCHIVED)
-                }
+                setFilterBasedOnTabPosition(tab.position)
                 viewModel.loadShoppingLists()
             }
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
+        setFilterBasedOnTabPosition(binding.tabsShoppinglists.selectedTabPosition)
     }
 
     private fun setupNavigation() {
@@ -93,6 +90,14 @@ class ShoppingListsFragment : DaggerFragment() {
             .setPositiveButton(R.string.dialogbutton_add) { _, _ -> createShoppingList() }
             .setNegativeButton(R.string.dialogbutton_cancel) { _, _ -> clearDialogInput() }
             .create()
+    }
+
+    private fun setFilterBasedOnTabPosition(tabPosition: Int) {
+        if (tabPosition == 0) {
+            viewModel.setFilter(ShoppingListFilter.ACTIVE)
+        } else if (tabPosition == 1) {
+            viewModel.setFilter(ShoppingListFilter.ARCHIVED)
+        }
     }
 
     private fun openShoppingListDetails(shoppingListId: String) {
