@@ -8,7 +8,7 @@
 
         <variable
             name="shoppinglist"
-            type="com.haxos.shoppingapp.shoppinglists.ShoppingList" />
+            type="com.haxos.shoppingapp.data.ShoppingList" />
 
         <variable
             name="viewmodel"

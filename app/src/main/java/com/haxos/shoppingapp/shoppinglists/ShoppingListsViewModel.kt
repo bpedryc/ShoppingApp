@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.haxos.shoppingapp.Event
+import com.haxos.shoppingapp.utils.Event
 import com.haxos.shoppingapp.data.Result
 import com.haxos.shoppingapp.data.Result.Success
 import com.haxos.shoppingapp.data.Result.Error
+import com.haxos.shoppingapp.data.ShoppingList
+import com.haxos.shoppingapp.data.database.ShoppingListDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

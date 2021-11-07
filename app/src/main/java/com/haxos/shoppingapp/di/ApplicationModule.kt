@@ -18,9 +18,9 @@ package com.haxos.shoppingapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.haxos.shoppingapp.shoppinglistdetails.GroceryDao
-import com.haxos.shoppingapp.data.ShoppingDatabase
-import com.haxos.shoppingapp.shoppinglists.ShoppingListDao
+import com.haxos.shoppingapp.data.database.GroceryDao
+import com.haxos.shoppingapp.data.database.ShoppingDatabase
+import com.haxos.shoppingapp.data.database.ShoppingListDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

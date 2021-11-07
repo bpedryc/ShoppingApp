@@ -1,6 +1,7 @@
-package com.haxos.shoppingapp.shoppinglists
+package com.haxos.shoppingapp.data.database
 
 import androidx.room.*
+import com.haxos.shoppingapp.data.ShoppingList
 
 @Dao
 interface ShoppingListDao {

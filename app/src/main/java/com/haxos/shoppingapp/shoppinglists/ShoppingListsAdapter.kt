@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.haxos.shoppingapp.data.ShoppingList
 import com.haxos.shoppingapp.databinding.ItemShoppinglistBinding
 import com.haxos.shoppingapp.shoppinglists.ShoppingListsAdapter.ViewHolder
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.haxos.shoppingapp.EventObserver
+import com.haxos.shoppingapp.utils.EventObserver
 import com.haxos.shoppingapp.databinding.FragmentShoppinglistsBinding
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
