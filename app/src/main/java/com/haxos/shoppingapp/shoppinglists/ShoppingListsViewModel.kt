@@ -55,7 +55,7 @@ class ShoppingListsViewModel @Inject constructor(
             }
         }
 
-        _shoppingLists.value = shoppingListsToShow
+        _shoppingLists.value = shoppingListsToShow.sortedByDescending { it.createdTime }
     }
 
     fun setFilter(filter: ShoppingListFilter) {
