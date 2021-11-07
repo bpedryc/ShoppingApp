@@ -26,6 +26,9 @@ class ShoppingListsViewModel @Inject constructor(
     private val _createdShoppingListEvent = MutableLiveData<Event<Unit>>()
     val createdShoppingListEvent: LiveData<Event<Unit>> = _createdShoppingListEvent
 
+    private val _deletedShoppingListEvent = MutableLiveData<Event<Unit>>()
+    val deletedShoppingListEvent: LiveData<Event<Unit>> = _deletedShoppingListEvent
+
     private val _noListsLabel = MutableLiveData<Int>()
     val noListsLabel: LiveData<Int> = _noListsLabel
 
@@ -74,6 +77,11 @@ class ShoppingListsViewModel @Inject constructor(
         val newShoppingList = ShoppingList(name)
         saveShoppingList(newShoppingList)
         _createdShoppingListEvent.value = Event(Unit)
+    }
+
+    fun deleteShoppingList(shoppingListId: String) = viewModelScope.launch {
+        shoppingListDao.deleteShoppingListById(shoppingListId)
+        _deletedShoppingListEvent.value = Event(Unit)
     }
 
     private suspend fun getShoppingLists() : List<ShoppingList>? {
