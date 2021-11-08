@@ -15,9 +15,6 @@ interface ShoppingListDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertShoppingList(shoppingList: ShoppingList)
 
-    @Update
-    suspend fun updateShoppingList(shoppingList: ShoppingList)
-
     @Query("UPDATE shopping_lists SET archived = :archived WHERE id = :shoppingListId")
     suspend fun updateArchived(shoppingListId: String, archived: Boolean)
 
