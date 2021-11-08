@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.haxos.shoppingapp.data.Grocery;
+import com.haxos.shoppingapp.data.models.Grocery;
 import com.haxos.shoppingapp.shoppinglistdetails.GroceriesAdapter.ViewHolder;
 
 import com.haxos.shoppingapp.databinding.ItemGroceryBinding;

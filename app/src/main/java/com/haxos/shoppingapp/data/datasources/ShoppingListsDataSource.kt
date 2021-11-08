@@ -1,7 +1,8 @@
-package com.haxos.shoppingapp.data.database
+package com.haxos.shoppingapp.data.datasources
 
 import com.haxos.shoppingapp.data.Result
-import com.haxos.shoppingapp.data.ShoppingList
+import com.haxos.shoppingapp.data.database.ShoppingListDao
+import com.haxos.shoppingapp.data.models.ShoppingList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

@@ -11,7 +11,7 @@
 
         <variable
             name="grocery"
-            type="com.haxos.shoppingapp.data.Grocery" />
+            type="com.haxos.shoppingapp.data.models.Grocery" />
 
     </data>
 

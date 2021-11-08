@@ -2,7 +2,7 @@ package com.haxos.shoppingapp.shoppinglistdetails
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.haxos.shoppingapp.data.Grocery
+import com.haxos.shoppingapp.data.models.Grocery
 
 @BindingAdapter("app:items")
 fun setItems(listView: RecyclerView, items: List<Grocery>) {

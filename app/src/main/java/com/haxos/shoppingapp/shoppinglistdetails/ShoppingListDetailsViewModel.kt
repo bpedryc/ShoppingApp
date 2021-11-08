@@ -1,9 +1,9 @@
 package com.haxos.shoppingapp.shoppinglistdetails
 
 import androidx.lifecycle.*
-import com.haxos.shoppingapp.data.Grocery
+import com.haxos.shoppingapp.data.models.Grocery
 import com.haxos.shoppingapp.data.Result
-import com.haxos.shoppingapp.data.database.ShoppingListDetailsDataSource
+import com.haxos.shoppingapp.data.datasources.ShoppingListDetailsDataSource
 import com.haxos.shoppingapp.utils.Event
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch

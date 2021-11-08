@@ -19,6 +19,8 @@ package com.haxos.shoppingapp.di
 import android.content.Context
 import androidx.room.Room
 import com.haxos.shoppingapp.data.database.*
+import com.haxos.shoppingapp.data.datasources.ShoppingListDetailsDataSource
+import com.haxos.shoppingapp.data.datasources.ShoppingListsDataSource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

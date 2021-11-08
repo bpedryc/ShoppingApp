@@ -3,8 +3,8 @@ package com.haxos.shoppingapp.shoppinglists
 import androidx.lifecycle.*
 import com.haxos.shoppingapp.R
 import com.haxos.shoppingapp.data.Result.Success
-import com.haxos.shoppingapp.data.ShoppingList
-import com.haxos.shoppingapp.data.database.ShoppingListsDataSource
+import com.haxos.shoppingapp.data.models.ShoppingList
+import com.haxos.shoppingapp.data.datasources.ShoppingListsDataSource
 import com.haxos.shoppingapp.utils.Event
 import kotlinx.coroutines.launch
 import javax.inject.Inject

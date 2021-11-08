@@ -1,4 +1,4 @@
-package com.haxos.shoppingapp.data
+package com.haxos.shoppingapp.data.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
