@@ -21,6 +21,7 @@ import androidx.room.Room
 import com.haxos.shoppingapp.data.database.GroceryDao
 import com.haxos.shoppingapp.data.database.ShoppingDatabase
 import com.haxos.shoppingapp.data.database.ShoppingListDao
+import com.haxos.shoppingapp.data.database.ShoppingListsDataSource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -39,6 +40,12 @@ object ApplicationModule {
         )
             .createFromAsset("initial_shopping.db")
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideShoppingListsDataSource(database: ShoppingDatabase): ShoppingListsDataSource {
+        return ShoppingListsDataSource(database.shoppingListDao())
     }
 
     @Singleton

@@ -2,19 +2,15 @@ package com.haxos.shoppingapp.shoppinglists
 
 import androidx.lifecycle.*
 import com.haxos.shoppingapp.R
-import com.haxos.shoppingapp.utils.Event
-import com.haxos.shoppingapp.data.Result
 import com.haxos.shoppingapp.data.Result.Success
-import com.haxos.shoppingapp.data.Result.Error
 import com.haxos.shoppingapp.data.ShoppingList
-import com.haxos.shoppingapp.data.database.ShoppingListDao
-import kotlinx.coroutines.Dispatchers
+import com.haxos.shoppingapp.data.database.ShoppingListsDataSource
+import com.haxos.shoppingapp.utils.Event
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ShoppingListsViewModel @Inject constructor(
-    private val shoppingListDao: ShoppingListDao
+    private val dataSource: ShoppingListsDataSource
 ): ViewModel() {
 
     private val _shoppingLists = MutableLiveData<List<ShoppingList>>().apply { value = emptyList() }
@@ -75,33 +71,21 @@ class ShoppingListsViewModel @Inject constructor(
 
     fun createShoppingList(name: String) = viewModelScope.launch {
         val newShoppingList = ShoppingList(name)
-        saveShoppingList(newShoppingList)
+        dataSource.saveShoppingList(newShoppingList)
         _createdShoppingListEvent.value = Event(Unit)
     }
 
     fun archiveShoppingList(shoppingListId: String) = viewModelScope.launch {
-        shoppingListDao.updateArchived(shoppingListId, true)
+        dataSource.archiveShoppingList(shoppingListId)
         _archivedShoppingListEvent.value = Event(Unit)
     }
 
     private suspend fun getShoppingLists() : List<ShoppingList>? {
-        val result = fetchShoppingLists()
+        val result = dataSource.getShoppingLists()
         if (result is Success) {
             return result.data
         }
         println(result)
         return null
-    }
-
-    private suspend fun saveShoppingList(shoppingList: ShoppingList) = withContext(Dispatchers.IO) {
-        shoppingListDao.insertShoppingList(shoppingList)
-    }
-
-    private suspend fun fetchShoppingLists(): Result<List<ShoppingList>> = withContext(Dispatchers.IO) {
-        return@withContext try {
-            Success(shoppingListDao.getShoppingLists())
-        } catch (e: Exception) {
-            Error(e)
-        }
     }
 }
