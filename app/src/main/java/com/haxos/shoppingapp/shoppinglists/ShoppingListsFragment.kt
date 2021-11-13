@@ -41,7 +41,6 @@ class ShoppingListsFragment : DaggerFragment() {
         setupTab()
         setupNavigation()
         setupFab()
-        setupRefresh()
         setupDialogs()
 
         viewModel.loadShoppingLists()
@@ -71,15 +70,6 @@ class ShoppingListsFragment : DaggerFragment() {
         binding.fabAddShoppinglist.setOnClickListener {
             addShoppingListDialog.show()
         }
-    }
-
-    private fun setupRefresh() {
-        viewModel.createdShoppingListEvent.observe(viewLifecycleOwner, EventObserver {
-            viewModel.loadShoppingLists()
-        })
-        viewModel.archivedShoppingListEvent.observe(viewLifecycleOwner, EventObserver {
-            viewModel.loadShoppingLists()
-        })
     }
 
     private fun setupDialogs() {

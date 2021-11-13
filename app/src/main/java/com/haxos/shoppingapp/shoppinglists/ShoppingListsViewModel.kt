@@ -19,12 +19,6 @@ class ShoppingListsViewModel @Inject constructor(
     private val _openShoppingListEvent = MutableLiveData<Event<String>>()
     val openShoppingListEvent: LiveData<Event<String>> = _openShoppingListEvent
 
-    private val _createdShoppingListEvent = MutableLiveData<Event<Unit>>()
-    val createdShoppingListEvent: LiveData<Event<Unit>> = _createdShoppingListEvent
-
-    private val _archivedShoppingListEvent = MutableLiveData<Event<Unit>>()
-    val archivedShoppingListEvent: LiveData<Event<Unit>> = _archivedShoppingListEvent
-
     private val _noListsLabel = MutableLiveData<Int>()
     val noListsLabel: LiveData<Int> = _noListsLabel
 
@@ -72,12 +66,12 @@ class ShoppingListsViewModel @Inject constructor(
     fun createShoppingList(name: String) = viewModelScope.launch {
         val newShoppingList = ShoppingList(name)
         dataSource.saveShoppingList(newShoppingList)
-        _createdShoppingListEvent.value = Event(Unit)
+        loadShoppingLists()
     }
 
     fun archiveShoppingList(shoppingListId: String) = viewModelScope.launch {
         dataSource.archiveShoppingList(shoppingListId)
-        _archivedShoppingListEvent.value = Event(Unit)
+        loadShoppingLists()
     }
 
     private suspend fun getShoppingLists() : List<ShoppingList>? {
