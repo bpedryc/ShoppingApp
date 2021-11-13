@@ -42,7 +42,6 @@ class ShoppingListDetailsFragment : DaggerFragment() {
 
         setupAddGroceryDialog()
         setupFab()
-        setupRefresh()
 
         viewModel.start(args.shoppingListId)
 
@@ -63,15 +62,6 @@ class ShoppingListDetailsFragment : DaggerFragment() {
         binding.fabAddGrocery.setOnClickListener {
             addGroceryDialog.show()
         }
-    }
-
-    private fun setupRefresh() {
-        viewModel.createdGroceryEvent.observe(viewLifecycleOwner, EventObserver {
-            viewModel.start(args.shoppingListId)
-        })
-        viewModel.deletedGroceryEvent.observe(viewLifecycleOwner, EventObserver {
-            viewModel.start(args.shoppingListId)
-        })
     }
 
     private fun createGrocery() {

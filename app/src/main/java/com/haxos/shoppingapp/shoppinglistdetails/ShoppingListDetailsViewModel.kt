@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.haxos.shoppingapp.data.models.Grocery
 import com.haxos.shoppingapp.data.Result
 import com.haxos.shoppingapp.data.datasources.ShoppingListDetailsDataSource
+import com.haxos.shoppingapp.data.models.ShoppingList
 import com.haxos.shoppingapp.utils.Event
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -16,17 +17,18 @@ class ShoppingListDetailsViewModel @Inject constructor(
     private val _groceries = MutableLiveData<List<Grocery>>().apply { value = emptyList() }
     val groceries: LiveData<List<Grocery>> = _groceries
 
-    private val _archived = MutableLiveData<Boolean>()
-    val archived: LiveData<Boolean> = _archived
+    private val _shoppingList = MutableLiveData<ShoppingList>()
+    val shoppingList: LiveData<ShoppingList> = _shoppingList
 
-    private val _createdGroceryEvent = MutableLiveData<Event<Unit>>()
-    val createdGroceryEvent: LiveData<Event<Unit>> = _createdGroceryEvent
-
-    private val _deletedGroceryEvent = MutableLiveData<Event<Unit>>()
-    val deletedGroceryEvent: LiveData<Event<Unit>> = _deletedGroceryEvent
+    private val shoppingListId: String?
+        get() = _shoppingList.value?.id
 
     val empty: LiveData<Boolean> = Transformations.map(_groceries) {
         it.isEmpty()
+    }
+
+    val archived: LiveData<Boolean> = Transformations.map(shoppingList) {
+        it.archived
     }
 
     fun start(shoppingListId: String) = viewModelScope.launch {
@@ -37,18 +39,22 @@ class ShoppingListDetailsViewModel @Inject constructor(
         val shoppingList = handleResult(shoppingListResult.await()) ?:return@launch
 
         _groceries.value = groceries
-        _archived.value = shoppingList.archived
+        _shoppingList.value = shoppingList
     }
 
     fun createGrocery(shoppingListId: String, groceryName: String) = viewModelScope.launch {
         val newGrocery = Grocery(groceryName, shoppingListId)
         dataSource.insertGrocery(newGrocery)
-        _createdGroceryEvent.value = Event(Unit)
+        refresh()
     }
 
     fun deleteGrocery(groceryId: String) = viewModelScope.launch {
         dataSource.deleteGroceryById(groceryId)
-        _deletedGroceryEvent.value = Event(Unit)
+        refresh()
+    }
+
+    private fun refresh() {
+        shoppingListId?.let { start(it) }
     }
 
     private fun <T>handleResult(result: Result<T>): T? {
