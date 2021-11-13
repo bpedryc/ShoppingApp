@@ -23,7 +23,8 @@ class ShoppingListDetailsFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<ShoppingListDetailsViewModel> { viewModelFactory }
 
-    private lateinit var binding: FragmentShoppinglistdetailsBinding
+    private var _binding: FragmentShoppinglistdetailsBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var addGroceryDialog: AlertDialog
 
@@ -32,7 +33,7 @@ class ShoppingListDetailsFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentShoppinglistdetailsBinding
+        _binding = FragmentShoppinglistdetailsBinding
             .inflate(inflater, container, false).apply {
                 viewmodel = viewModel
                 lifecycleOwner = viewLifecycleOwner
@@ -46,6 +47,11 @@ class ShoppingListDetailsFragment : DaggerFragment() {
         viewModel.start(args.shoppingListId)
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setupAddGroceryDialog() {

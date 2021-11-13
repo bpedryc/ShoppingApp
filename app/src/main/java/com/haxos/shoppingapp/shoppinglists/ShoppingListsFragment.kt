@@ -22,7 +22,8 @@ class ShoppingListsFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<ShoppingListsViewModel> { viewModelFactory }
 
-    private lateinit var binding: FragmentShoppinglistsBinding
+    private var _binding: FragmentShoppinglistsBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var addShoppingListDialog: AlertDialog
 
@@ -31,7 +32,7 @@ class ShoppingListsFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentShoppinglistsBinding.inflate(inflater, container, false).apply {
+        _binding = FragmentShoppinglistsBinding.inflate(inflater, container, false).apply {
             shoppingLists.adapter = ShoppingListsAdapter(viewModel)
 
             viewmodel = viewModel
@@ -46,6 +47,11 @@ class ShoppingListsFragment : DaggerFragment() {
         viewModel.loadShoppingLists()
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setupTab() {
