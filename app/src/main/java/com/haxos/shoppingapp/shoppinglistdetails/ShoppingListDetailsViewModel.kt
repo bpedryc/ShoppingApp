@@ -23,8 +23,8 @@ class ShoppingListDetailsViewModel @Inject constructor(
     private val shoppingListId: String?
         get() = _shoppingList.value?.id
 
-    val empty: LiveData<Boolean> = Transformations.map(_groceries) {
-        it.isEmpty()
+    val showNoGroceriesLabel: LiveData<Boolean> = Transformations.map(_groceries) {
+        it.isEmpty() && _shoppingList.value != null
     }
 
     val archived: LiveData<Boolean> = Transformations.map(shoppingList) {
