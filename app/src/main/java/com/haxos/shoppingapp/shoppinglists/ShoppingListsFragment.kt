@@ -16,6 +16,8 @@ import com.haxos.shoppingapp.utils.EventObserver
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
+private const val BUNDLE_SELECTED_TAB = "BUNDLE_SELECTED_TAB"
+
 class ShoppingListsFragment : DaggerFragment() {
 
     @Inject
@@ -24,6 +26,8 @@ class ShoppingListsFragment : DaggerFragment() {
 
     private var _binding: FragmentShoppinglistsBinding? = null
     private val binding get() = _binding!!
+
+    var selectedTab = 0
 
     private lateinit var addShoppingListDialog: AlertDialog
 
@@ -39,7 +43,7 @@ class ShoppingListsFragment : DaggerFragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
-        setupTab()
+        setupTab(savedInstanceState)
         setupNavigation()
         setupFab()
         setupDialogs()
@@ -54,16 +58,32 @@ class ShoppingListsFragment : DaggerFragment() {
         _binding = null
     }
 
-    private fun setupTab() {
-        binding.tabsShoppinglists.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                setFilterBasedOnTabPosition(tab.position)
-                viewModel.loadShoppingLists()
-            }
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
-            override fun onTabReselected(tab: TabLayout.Tab) {}
-        })
-        setFilterBasedOnTabPosition(binding.tabsShoppinglists.selectedTabPosition)
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(BUNDLE_SELECTED_TAB, selectedTab)
+    }
+
+    private fun setupTab(savedInstanceState: Bundle?) {
+        savedInstanceState?.let {
+            val savedTab = savedInstanceState.getInt(BUNDLE_SELECTED_TAB, 0)
+            selectedTab = savedTab
+        }
+
+        binding.tabsShoppinglists.apply {
+
+            getTabAt(selectedTab)?.select()
+            setFilterBasedOnTabPosition(selectedTab)
+
+            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    selectedTab = tab.position
+                    setFilterBasedOnTabPosition(selectedTab)
+                    viewModel.loadShoppingLists()
+                }
+                override fun onTabUnselected(tab: TabLayout.Tab) {}
+                override fun onTabReselected(tab: TabLayout.Tab) {}
+            })
+        }
     }
 
     private fun setupNavigation() {
