@@ -38,8 +38,8 @@ class ShoppingListDetailsViewModel @Inject constructor(
         val groceries = handleResult(groceriesResult.await()) ?: return@launch
         val shoppingList = handleResult(shoppingListResult.await()) ?:return@launch
 
-        _groceries.value = groceries
         _shoppingList.value = shoppingList
+        _groceries.value = groceries
     }
 
     fun createGrocery(shoppingListId: String, groceryName: String) = viewModelScope.launch {
