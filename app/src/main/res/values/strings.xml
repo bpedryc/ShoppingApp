@@ -15,4 +15,7 @@
     <string name="no_active_shopping_lists">You have no active shopping lists</string>
     <string name="no_archived_shopping_lists">You have no archived shopping lists</string>
     <string name="no_groceries">There are no groceries on this list</string>
+    <string name="error_message_default">An error has occured</string>
+    <string name="error_message_groceries_fetch">Couldn\'t fetch the groceries from the database</string>
+    <string name="error_message_shoppinglist_fetch">Couldn\'t fetch the shopping list from the database</string>
 </resources>

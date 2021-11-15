@@ -1,11 +1,11 @@
 package com.haxos.shoppingapp.shoppinglistdetails
 
 import androidx.lifecycle.*
+import com.haxos.shoppingapp.R
 import com.haxos.shoppingapp.data.models.Grocery
 import com.haxos.shoppingapp.data.Result
 import com.haxos.shoppingapp.data.datasources.ShoppingListDetailsDataSource
 import com.haxos.shoppingapp.data.models.ShoppingList
-import com.haxos.shoppingapp.utils.Event
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,6 +19,9 @@ class ShoppingListDetailsViewModel @Inject constructor(
 
     private val _shoppingList = MutableLiveData<ShoppingList>()
     val shoppingList: LiveData<ShoppingList> = _shoppingList
+
+    private val _errorMessage = MutableLiveData<Int>()
+    val errorMessage: LiveData<Int> = _errorMessage
 
     private val shoppingListId: String?
         get() = _shoppingList.value?.id
@@ -35,8 +38,15 @@ class ShoppingListDetailsViewModel @Inject constructor(
         val groceriesResult = async { dataSource.getShoppingListGroceries(shoppingListId) }
         val shoppingListResult = async { dataSource.getShoppingList(shoppingListId) }
 
-        val groceries = handleResult(groceriesResult.await()) ?: return@launch
-        val shoppingList = handleResult(shoppingListResult.await()) ?:return@launch
+        val groceries = handleResult(
+            result = groceriesResult.await(),
+            messageOnError = R.string.error_message_groceries_fetch
+        ) ?: return@launch
+
+        val shoppingList = handleResult(
+            result = shoppingListResult.await(),
+            messageOnError = R.string.error_message_shoppinglist_fetch
+        ) ?: return@launch
 
         _shoppingList.value = shoppingList
         _groceries.value = groceries
@@ -57,10 +67,14 @@ class ShoppingListDetailsViewModel @Inject constructor(
         shoppingListId?.let { start(it) }
     }
 
-    private fun <T>handleResult(result: Result<T>): T? {
+    private fun <T>handleResult(
+        result: Result<T>,
+        messageOnError: Int = R.string.error_message_default
+    ): T? {
         if (result is Result.Success) {
             return result.data
         }
+        _errorMessage.value = messageOnError
         println(result) //Log the error
         return null
     }

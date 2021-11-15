@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.haxos.shoppingapp.R
 import com.haxos.shoppingapp.databinding.FragmentShoppinglistdetailsBinding
-import com.haxos.shoppingapp.utils.EventObserver
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -43,10 +43,17 @@ class ShoppingListDetailsFragment : DaggerFragment() {
 
         setupAddGroceryDialog()
         setupFab()
+        setupErrorToast()
 
         viewModel.start(args.shoppingListId)
 
         return binding.root
+    }
+
+    private fun setupErrorToast() {
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroyView() {
